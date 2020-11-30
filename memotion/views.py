@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404
 
 
@@ -23,8 +23,9 @@ def login(request):
 
 def logout(request):
     request.session.clear()
+    return redirect('/')
 
-    return render()
+def get_post(request):
 
 def save_post(request):
 
