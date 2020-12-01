@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="{% url 'memotion:savememo' selected_memo.id %}" method="post">{% csrf_token %}
+<h1><input type="text" value="{{selected_memo.title}}" name="title"></h1>
+    private<input type="checkbox" name="isChecked" value=True ><br>
+<textarea name="content">{{selected_memo.content}}</textarea>
+<input type="submit" value="저장">
+</form>
+</body>
+</html>
