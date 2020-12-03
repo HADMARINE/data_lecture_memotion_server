@@ -13,5 +13,8 @@
 private<input type="checkbox" name="isChecked" value=True ><br>
 <input type="submit" value="저장">
 </form>
+<form action="{% url 'memotion:deletememo' selected_memo.id %}" method="post">{% csrf_token %}
+<input type="submit" value="삭제">
+</form>
 </body>
 </html>

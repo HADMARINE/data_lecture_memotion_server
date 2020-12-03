@@ -50,3 +50,7 @@ def newmemo(request):
     memo.save()
     return render(request, 'memotion/memo.html', {'selected_memo': memo})
 
+
+def deletememo(request, memo_id):
+    Memo.objects.filter(pk=memo_id).delete()
+    return HttpResponseRedirect(reverse('memotion:memoindex', args=()))

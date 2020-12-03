@@ -9,6 +9,7 @@ urlpatterns = [
     path('', views.memoindex, name='memoindex'),
     path('<int:memo_id>/save', views.savememo, name='savememo'),
     path('<int:memo_id>/', views.showmemo, name='memo'),
+    path('<int:memo_id>/delete', views.deletememo, name='deletememo'),
     path('newmemo/newmemo', views.newmemo, name="newmemo")
 ]
 
