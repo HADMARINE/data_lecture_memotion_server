@@ -1,3 +1,4 @@
+import datetime
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpRequest, Http404, HttpResponseRedirect
 from django.template import loader
@@ -29,6 +30,9 @@ def showmemo(request, memo_id):
 def savememo(request, memo_id):
     selected_memo = get_object_or_404(Memo, pk=memo_id)
     title = request.POST.get('title', 'wow')
+    if title == '':
+        title = '제목 없음'
+
     content = request.POST.get('content', 'hello')
     private = request.POST.get('isChecked', False)
     selected_memo.title = title
@@ -38,10 +42,11 @@ def savememo(request, memo_id):
     return HttpResponseRedirect(reverse('memotion:memoindex', args=()))
 
 
-# def addmemo(request):
-#     return render(request, 'memotion/memo.html', {'selected_memo': })
-
-
-# def selectmemo(request, memo_id):
-#     memo_list = get_object_or_404(Post, user_id)
+def newmemo(request):
+    memo = Memo()
+    memo.title = ""
+    memo.content = ""
+    memo.pub_date = datetime.datetime.now()
+    memo.save()
+    return render(request, 'memotion/memo.html', {'selected_memo': memo})
 

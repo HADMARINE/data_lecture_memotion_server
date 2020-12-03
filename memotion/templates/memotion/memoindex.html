@@ -11,7 +11,7 @@
             {% for memo in memo_list %}
                 <li><a href="/memotion/{{memo.id}}">{{memo.title}}</a></li>
             {% endfor %}
-            <li><a href="">add memo</a></li>
+            <li><a href="{% url 'memotion:newmemo' %}">add memo</a></li>
         </ul>
     {% else %}
         <p>No memo</p>
