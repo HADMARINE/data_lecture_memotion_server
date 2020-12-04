@@ -10,7 +10,11 @@
 <input type="text" value="{{selected_memo.title}}" name="title">
 <h1>내용</h1>
 <textarea name="content">{{selected_memo.content}}</textarea><br>
-private<input type="checkbox" name="isChecked" value=True ><br>
+    {% if selected_memo.private %}
+    private<input type="checkbox" name="isChecked" value=True checked><br>
+    {% else %}
+    private<input type="checkbox" name="isChecked" value=True ><br>
+    {% endif %}
 <input type="submit" value="저장">
 </form>
 <form action="{% url 'memotion:deletememo' selected_memo.id %}" method="post">{% csrf_token %}
