@@ -54,3 +54,24 @@ def newmemo(request):
 def deletememo(request, memo_id):
     Memo.objects.filter(pk=memo_id).delete()
     return HttpResponseRedirect(reverse('memotion:memoindex', args=()))
+
+def index(request):
+
+    # if logined, show home.
+    # else, redirect to login.
+
+    id = request.session['token']
+
+
+def login(request):
+    if request.method != "POST":
+        return Http404("Request destination does not exist")
+
+    id = request.POST['id']
+    pw = request.POST['password']
+
+
+
+def logout(request):
+    request.session.clear()
+    return redirect('/')

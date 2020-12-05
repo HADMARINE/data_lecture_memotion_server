@@ -11,6 +11,9 @@ urlpatterns = [
     path('<int:memo_id>/', views.showmemo, name='memo'),
     path('<int:memo_id>/delete', views.deletememo, name='deletememo'),
     path('newmemo/newmemo', views.newmemo, name="newmemo")
+    path('login/', login),
+    path('logout/', logout),
+    path('post/<int:post_id>/view', get_post),
 ]
 
 app_name = 'memotion'
