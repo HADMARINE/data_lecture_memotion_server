@@ -21,6 +21,7 @@ from rest_framework_jwt.views import\
     refresh_jwt_token
 
 urlpatterns = [
+    path('memotion/', include('memotion.urls')),
     path('admin/', admin.site.urls),
     path('api/token/', obtain_jwt_token),
     path('api/token/verify/', verify_jwt_token),

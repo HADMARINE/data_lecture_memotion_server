@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Your Memo</h1>
+    {% if memo_list %}
+        <ul>
+            {% for memo in memo_list %}
+                <li><a href="/memotion/{{memo.id}}">{{memo.title}}</a></li>
+            {% endfor %}
+            <li><a href="{% url 'memotion:newmemo' %}">add memo</a></li>
+        </ul>
+    {% else %}
+        <p>No memo</p>
+    {% endif %}
+</body>
+</html>
