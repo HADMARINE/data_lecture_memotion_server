@@ -2,10 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Memotion</title>
+    <style>
+        a:link { color: black; text-decoration: none;}
+ a:visited { color: black; text-decoration: none;}
+ a:hover { color: black; text-decoration: underline;}
+    </style>
 </head>
 <body>
-<h1>Your Memo</h1>
+<h1>{{user.name}}'s Memo</h1>
     {% if memo_list %}
         <ul>
             {% for memo in memo_list %}

@@ -5,15 +5,60 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Ranchers&display=swap" rel="stylesheet">
+    <title>Memotion</title>
+    <style>
+            h1{
+    text-align:center;
+    font-family: 'Ranchers', cursive;
+        font-size:70px;
+        color:white;
+        text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    }
+        form{
+        position:absolute;
+        top:30px;
+        left:50%;
+        transform:translateX(-50%);
+        }
+        #id{
+        top:10px;
+        position:relative;
+        }
+        #pw{
+        position:relative;
+        top:25px;
+        }
+        #name{
+        position:relative;
+        top:40px;
+        }
+        #id, #pw, #name{
+        position:relative;
+        width:400px;
+        height:40px;
+        border-radius:15px;
+        }
+        #register{
+        position:relative;
+        top:55px;
+        width:408px;
+        height:40px;
+        border-radius:10px;
+        }
+        body{
+        background-color:#5D97FC;
+        }
+    </style>
 </head>
 <body>
     <form action="{% url 'memotion:register'  %}" method="post">{% csrf_token %}
-        <h1>회원가입</h1>
-        <input type="id" value="" name="user_id" placeholder="ID"/><br>
-        <input type="password" value="" name="password" placeholder="PASSWORD"><br>
-        <input type="name" value="" name="name" placeholder="NAME"><br>
-        <input type="submit" value="회원가입">
+        <h1>Memotion</h1>
+        <input type="id" value="" name="user_id" placeholder="ID" id="id"/><br>
+        <input type="password" value="" name="password" placeholder="PASSWORD" id="pw"><br>
+        <input type="name" value="" name="name" placeholder="NAME" id="name"><br>
+        <input type="submit" value="회원가입" id="register">
     </form>
 </body>
 </html>

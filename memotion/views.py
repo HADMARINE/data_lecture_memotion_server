@@ -20,7 +20,8 @@ def index_page(request):
     except:
         memo_list = None
 
-    context = {'memo_list': memo_list}
+    user = User.objects.get(pk=user_id)
+    context = {'memo_list': memo_list, 'user': user}
     return render(request, 'memotion/index_page.html', context)
 
 
@@ -112,7 +113,8 @@ def register(request):
     _pw = request.POST['password']
     name = request.POST['name']
 
-    # find_user = User.objects.get(user_id=id)
+    # find_user = User.objects.get(pk=id)
+    #
     # if find_user is not None:
     #     return HttpResponse("User already exists.")
 
