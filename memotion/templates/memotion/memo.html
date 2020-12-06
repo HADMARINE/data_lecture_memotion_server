@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<form action="{% url 'memotion:savememo' selected_memo.id %}" method="post">{% csrf_token %}
+<form action="{% url 'memotion:save_memo' selected_memo.id %}" method="post">{% csrf_token %}
 <h1>제목</h1>
 <input type="text" value="{{selected_memo.title}}" name="title">
 <h1>내용</h1>
@@ -17,7 +17,7 @@
     {% endif %}
 <input type="submit" value="저장">
 </form>
-<form action="{% url 'memotion:deletememo' selected_memo.id %}" method="post">{% csrf_token %}
+<form action="{% url 'memotion:delete_memo' selected_memo.id %}" method="post">{% csrf_token %}
 <input type="submit" value="삭제">
 </form>
 </body>

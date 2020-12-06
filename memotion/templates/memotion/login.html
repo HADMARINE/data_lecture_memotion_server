@@ -2,11 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Memotion</title>
 </head>
 <body>
-id:<input><br>
-pw:<input><br>
-<a href="/memotion/{{user_id}}"><input type="submit" value="login"></a>
+<form action="{% url 'memotion:login' %}" method="post">{% csrf_token %}
+    <h1>로그인</h1>
+    <input type="id" value="" name="user_id" placeholder="ID"/><br>
+    <input type="password" value="" name="password" placeholder="PASSWORD"><br>
+    <input type="submit" value="로그인">
+</form>
+<a href="{% url 'memotion:register_page' %}"><button>회원가입</button></a>
 </body>
 </html>

@@ -9,12 +9,15 @@
     {% if memo_list %}
         <ul>
             {% for memo in memo_list %}
-                <li><a href="/memotion/{{memo.id}}">{{memo.title}}</a></li>
+                <li><a href="{% url 'memotion:show_memo' memo.id %}">{{memo.title}}</a></li>
             {% endfor %}
-            <li><a href="{% url 'memotion:newmemo' %}">add memo</a></li>
+            <li><a href="{% url 'memotion:memo_create' %}">add memo</a></li>
         </ul>
     {% else %}
         <p>No memo</p>
+<ul>
+    <li><a href="{% url 'memotion:memo_create' %}">add memo</a></li>
+</ul>
     {% endif %}
 </body>
 </html>
