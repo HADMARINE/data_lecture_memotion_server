@@ -18,7 +18,13 @@ def index_page(request):
         # Redirect to login
         return HttpResponseRedirect("/login")
 
-    memo_list = Memo.objects.get(user_id=user_id).order_by('-pub_date')
+    memo_list = None
+
+    try:
+        memo_list = Memo.objects.get(user_id=user_id).order_by('-pub_date')
+    except:
+        return HttpResponseRedirect('memo/create')
+
     context = {'memo_list': memo_list}
     return render(request, 'memotion/index_page.html', context)
 
