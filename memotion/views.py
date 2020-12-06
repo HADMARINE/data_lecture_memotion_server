@@ -54,7 +54,15 @@ def save_memo(request, memo_id):
 
 
 def create_memo(request):
+    id = request.session.get('user_id', None)
+
+    if id == None:
+        return HttpResponseRedirect("/login")
+
+    user = User.objects.get(user_id=id)
+
     memo = Memo()
+    memo.user = user
     memo.title = ""
     memo.content = ""
     memo.pub_date = datetime.datetime.now()
