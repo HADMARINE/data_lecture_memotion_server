@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="{% url 'memotion:save_memo' selected_memo.id %}" method="post">{% csrf_token %}
+<h1>제목</h1>
+<input type="text" value="{{selected_memo.title}}" name="title">
+<h1>내용</h1>
+<textarea name="content">{{selected_memo.content}}</textarea><br>
+    {% if selected_memo.private %}
+    private<input type="checkbox" name="isChecked" value=True checked><br>
+    {% else %}
+    private<input type="checkbox" name="isChecked" value=True ><br>
+    {% endif %}
+<input type="submit" value="저장">
+</form>
+<form action="{% url 'memotion:delete_memo' selected_memo.id %}" method="post">{% csrf_token %}
+<input type="submit" value="삭제">
+</form>
+</body>
+</html>
