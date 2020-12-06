@@ -82,7 +82,13 @@ def login(request):
     _pw = request.POST['password']
     pw = _pw
 
-    user = User.objects.get(user_id=id)
+    user = None
+
+    try:
+        user = User.objects.get(user_id=id)
+    except:
+        return HttpResponseRedirect("/login")
+
     if user is None:
         return HttpResponse("USER NOT FOUND")
 
