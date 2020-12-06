@@ -10,20 +10,24 @@ from data_lecture_memotion_server.settings import SECRET_KEY
 from memotion.models import Memo, User
 
 
-def memoindex(request):
+def index_page(request):
     user_id = request.session.get("user_id", None)
 
     if user_id is None:
         # Redirect to login
         return HttpResponseRedirect("/login")
 
-    memo_list = Memo.objects.all().order_by('-pub_date')
+    memo_list = Memo.objects.get(user_id=user_id).order_by('-pub_date')
     context = {'memo_list': memo_list}
-    return render(request, 'memotion/memoindex.html', context)
+    return render(request, 'memotion/index_page.html', context)
 
 
 def get_memo(request, memo_id):
-    selected_memo = get_object_or_404(Memo, pk=memo_id)
+    user_id = request.session.get('user_id', None)
+    if user_id is None:
+        return HttpResponseRedirect('/login')
+
+    selected_memo = Memo.objects.get(user_id=user_id)
     return render(request, 'memotion/memo.html', {'selected_memo': selected_memo})
 
 
@@ -39,7 +43,7 @@ def save_memo(request, memo_id):
     selected_memo.content = content
     selected_memo.private = private
     selected_memo.save()
-    return HttpResponseRedirect(reverse('memotion:memoindex', args=()))
+    return HttpResponseRedirect(reverse('memotion:index_page', args=()))
 
 
 def create_memo(request):
@@ -54,14 +58,8 @@ def create_memo(request):
 
 def delete_memo(request, memo_id):
     Memo.objects.filter(pk=memo_id).delete()
-    return HttpResponseRedirect(reverse('memotion:memoindex', args=()))
+    return HttpResponseRedirect(reverse('memotion:index_page', args=()))
 
-
-def index(request):
-    # if logined, show home.
-    # else, redirect to login.
-
-    id = request.session['token']
 
 def create_secret(pw):
     enc_pw = SECRET_KEY.encrypt(
