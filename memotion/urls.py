@@ -7,12 +7,12 @@ urlpatterns = [
     # path('<str:user_id>/<int:id>/', views.memo, name='memo')
 
     path('', views.memoindex, name='index_page'),
-    path('memo/<int:memo_id>/save', views.savememo, name='save_memo'),
-    path('memo/<int:memo_id>/view', views.showmemo, name='show_memo'),
-    path('<int:memo_id>/delete', views.deletememo, name='delete_memo'),
-    path('newmemo/', views.newmemo, name="memo_create"),
-    path('login/', login),
-    path('logout/', logout),
+    path('memo/<int:memo_id>/save', views.save_memo, name='save_memo'),
+    path('memo/<int:memo_id>/view', views.get_memo, name='show_memo'),
+    path('<int:memo_id>/delete', views.delete_memo, name='delete_memo'),
+    path('newmemo/', views.create_memo, name="memo_create"),
+    path('login/', views.login),
+    path('logout/', views.logout),
 ]
 
 app_name = 'memotion'
