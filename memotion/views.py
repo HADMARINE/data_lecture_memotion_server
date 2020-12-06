@@ -17,7 +17,7 @@ def index_page(request):
     memo_list = None
 
     try:
-        memo_list = Memo.objects.get(user_id=user_id).order_by('-pub_date')
+        memo_list = Memo.objects.all().order_by('-pub_date')
     except:
         return HttpResponseRedirect('memo/create')
 
