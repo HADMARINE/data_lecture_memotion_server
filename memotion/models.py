@@ -2,13 +2,13 @@ from django.db import models
 
 
 # Create your models here.
-# class User(models.Model):
-#     user_id = models.CharField(max_length=16, primary_key=True)
-#     password = models.CharField(max_length=128)
-#     name = models.CharField(max_length=16)
-#
-#     def __str__(self):
-#         return self.user_id
+class User(models.Model):
+    user_id = models.CharField(max_length=16, primary_key=True)
+    password = models.CharField(max_length=128)
+    name = models.CharField(max_length=16)
+
+    def __str__(self):
+        return self.user_id
 
 
 class Memo(models.Model):
@@ -20,4 +20,3 @@ class Memo(models.Model):
 
     def __str__(self):
         return self.title
-
