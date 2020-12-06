@@ -5,20 +5,30 @@
     <title>Title</title>
 </head>
 <body>
-<form action="{% url 'memotion:save_memo' selected_memo.id %}" method="post">{% csrf_token %}
-<h1>제목</h1>
-<input type="text" value="{{selected_memo.title}}" name="title">
-<h1>내용</h1>
-<textarea name="content">{{selected_memo.content}}</textarea><br>
-    {% if selected_memo.private %}
-    private<input type="checkbox" name="isChecked" value=True checked><br>
-    {% else %}
-    private<input type="checkbox" name="isChecked" value=True ><br>
-    {% endif %}
-<input type="submit" value="저장">
-</form>
-<form action="{% url 'memotion:delete_memo' selected_memo.id %}" method="post">{% csrf_token %}
-<input type="submit" value="삭제">
-</form>
+<div style="display:flex; flex-direction: row; width: 100vw; justify-content:center; align-items:center;">
+    <div style="display:flex; flex:8;">
+        <form action="{% url 'memotion:save_memo' selected_memo.id %}" method="post">{% csrf_token %}
+        <h1>제목</h1>
+        <input type="text" value="{{selected_memo.title}}" name="title">
+        <h1>내용</h1>
+        <textarea name="content">{{selected_memo.content}}</textarea><br>
+            {% if selected_memo.private %}
+            private<input type="checkbox" name="isChecked" value=True checked><br>
+            {% else %}
+            private<input type="checkbox" name="isChecked" value=True ><br>
+            {% endif %}
+        <input type="submit" value="저장">
+        </form>
+        <form action="{% url 'memotion:delete_memo' selected_memo.id %}" method="post">{% csrf_token %}
+        <input type="submit" value="삭제">
+        </form>
+    </div>
+    <div style="display:flex; flex:2;">
+        <input type="text" id="text_copy" value="http://localhost:8000/memo/{{selected_memo.id}}/view">
+        <button onclick="const copyText = document.getElementById('text_copy'); copyText.select(); document.execCommand('copy');">공유하기</button>
+    </div>
+</div>
+
+
 </body>
 </html>

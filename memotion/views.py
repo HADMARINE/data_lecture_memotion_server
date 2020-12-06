@@ -51,7 +51,7 @@ def save_memo(request, memo_id):
 def create_memo(request):
     id = request.session.get('user_id', None)
 
-    if id == None:
+    if id is None:
         return HttpResponseRedirect("/login")
 
     user = User.objects.get(user_id=id)
@@ -64,7 +64,6 @@ def create_memo(request):
     memo.save()
 
     return render(request, 'memotion/memo.html', {'selected_memo': memo})
-
 
 def delete_memo(request, memo_id):
     Memo.objects.filter(pk=memo_id).delete()
