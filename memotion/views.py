@@ -1,7 +1,8 @@
+import base64
+import codecs
+import crypt
 import datetime
 
-from cryptography.hazmat.primitives import hashes
-from cryptography.hazmat.primitives.asymmetric import padding
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpRequest, Http404, HttpResponseRedirect
 from django.template import loader
@@ -60,53 +61,52 @@ def delete_memo(request, memo_id):
     Memo.objects.filter(pk=memo_id).delete()
     return HttpResponseRedirect(reverse('memotion:index_page', args=()))
 
-
-def create_secret(pw):
-    enc_pw = SECRET_KEY.encrypt(
-        pw,
-        padding.OAEP(
-            mgf=padding.MGF1(algorithm=hashes.SHA256()),
-            algorithm=hashes.SHA256(),
-            label=None
-        )
-    )
-
-    return enc_pw
-
+def login_page(request):
+    return render(request, 'memotion/login.html')
 
 def login(request):
     if request.method != "POST":
         return Http404("Request destination does not exist")
 
-    id = request.POST['id']
+    id = request.POST['user_id']
     _pw = request.POST['password']
-    pw = create_secret(_pw)
+    pw = _pw
 
-    user = User.objects.get(user_id=id, password=pw)
+    user = User.objects.get(user_id=id)
     if user is None:
-        return Http404("Invalid User Data")
+        return HttpResponse("USER NOT FOUND")
+
+    if user.password != _pw:
+        return HttpResponse("PASSWORD INVALID")
 
     request.session.clear()
     request.session['user_id'] = id
     request.session.modified = True
 
+    return HttpResponseRedirect('/')
+
 def logout(request):
     request.session.clear()
     return HttpResponseRedirect('/login')
 
+def register_page(request):
+    return render(request, 'memotion/register.html')
+
 def register(request):
-    id = request.POST['id']
+    id = request.POST['user_id']
     _pw = request.POST['password']
     name = request.POST['name']
 
-    find_user = User.objects.get(user_id = id)
-    if find_user is not None:
-        return Http404("User already exists.")
+    # find_user = User.objects.get(user_id=id)
+    # if find_user is not None:
+    #     return HttpResponse("User already exists.")
 
     user = User()
 
     user.user_id = id
-    user.password = create_secret(_pw)
+    user.password = _pw
     user.name = name
+
+    user.save()
 
     return HttpResponseRedirect('/login')
