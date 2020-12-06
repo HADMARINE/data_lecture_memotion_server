@@ -111,16 +111,21 @@ def register(request):
     _pw = request.POST['password']
     name = request.POST['name']
 
-    # find_user = User.objects.get(user_id=id)
-    # if find_user is not None:
-    #     return HttpResponse("User already exists.")
+    find_user = None
 
-    user = User()
+    try:
+        find_user = User.objects.get(user_id=id)
 
-    user.user_id = id
-    user.password = _pw
-    user.name = name
+    except:
 
-    user.save()
+        user = User()
 
-    return HttpResponseRedirect('/login')
+        user.user_id = id
+        user.password = _pw
+        user.name = name
+
+        user.save()
+
+        return HttpResponseRedirect('/login')
+
+    return HttpResponse("User exists")
