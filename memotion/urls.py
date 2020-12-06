@@ -11,7 +11,10 @@ urlpatterns = [
     path('memo/<int:memo_id>/view', views.get_memo, name='show_memo'),
     path('<int:memo_id>/delete', views.delete_memo, name='delete_memo'),
     path('newmemo/', views.create_memo, name="memo_create"),
-    path('login/', views.login),
+    path('login/', views.login_page, name="login_page"),
+    path('api/login/', views.login, name="login"),
+    path('register/', views.register_page, name="register_page"),
+    path('api/register/', views.register, name="register"),
     path('logout/', views.logout),
 ]
 
