@@ -7,22 +7,61 @@
         a:link { color: black; text-decoration: none;}
  a:visited { color: black; text-decoration: none;}
  a:hover { color: black; text-decoration: underline;}
+
+ body{
+ background-color:#5D97FC;
+ }
+
+#title{
+color:white;
+margin-left:50px;
+font-size:60px;
+}
+
+ #container{
+ width:210px;
+ height:300px;
+ background-color:white;
+ display:inline-block;
+ margin-left:50px;
+ padding-left:30px;
+ box-sizing:border-box;
+ border:2px solid black;
+ border-radius:20px;
+ }
+
+ .addmemo{
+ width:210px;
+ height:300px;
+ display:inline-block;
+ margin-left:50px;
+ box-sizing:border-box;
+ border:1px dashed black;
+border-radius:20px;
+ }
+
+ .plus{
+ text-align:center;
+ font-size:100px;
+
+ }
+
     </style>
 </head>
 <body>
-<h1>{{user.name}}'s Memo</h1>
+<h1 id="title">{{user.name}}'s Memo</h1>
     {% if memo_list %}
-        <ul>
+
             {% for memo in memo_list %}
-                <li><a href="{% url 'memotion:show_memo' memo.id %}">{{memo.title}}</a></li>
-            {% endfor %}
-            <li><a href="{% url 'memotion:memo_create' %}">add memo</a></li>
-        </ul>
+<a href="{% url 'memotion:show_memo' memo.id %}"><div id="container"><h2>{{memo.title}}</h2><br><h4>{{memo.content}}</h4></div></a>
+{% if forloop.last%}
+<a href="{% url 'memotion:memo_create' %}"><div class="addmemo"><h1 class="plus">+</h1></div></a>
+{% endif %}
+{% endfor %}
+
     {% else %}
-        <p>No memo</p>
-<ul>
-    <li><a href="{% url 'memotion:memo_create' %}">add memo</a></li>
-</ul>
+
+<a href="{% url 'memotion:memo_create' %}"><div class="addmemo"><h1 class="plus">+</h1></div></a>
     {% endif %}
 </body>
 </html>
