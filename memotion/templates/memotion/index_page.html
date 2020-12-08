@@ -12,7 +12,7 @@
  background-color:#5D97FC;
  }
 
-#title{
+#name{
 color:white;
 margin-left:50px;
 font-size:60px;
@@ -24,7 +24,8 @@ font-size:60px;
  background-color:white;
  display:inline-block;
  margin-left:50px;
- padding-left:30px;
+ padding-left:20px;
+ padding-right:20px;
  box-sizing:border-box;
  border:2px solid black;
  border-radius:20px;
@@ -43,24 +44,21 @@ border-radius:20px;
  .plus{
  text-align:center;
  font-size:100px;
-
  }
 
     </style>
 </head>
 <body>
-<h1 id="title">{{user.name}}'s Memo</h1>
+<h1 id="name">{{user.name}}'s Memo</h1>
     {% if memo_list %}
 
             {% for memo in memo_list %}
-<a href="{% url 'memotion:show_memo' memo.id %}"><div id="container"><h2>{{memo.title}}</h2><br><h4>{{memo.content}}</h4></div></a>
+<a href="{% url 'memotion:show_memo' memo.id %}"><div id="container"><h2 id="title">{{memo.title}}</h2><br><h4 id="content">{{memo.content}}</h4></div></a>
 {% if forloop.last%}
-<a href="{% url 'memotion:memo_create' %}"><div class="addmemo"><h1 class="plus">+</h1></div></a>
+<a href="{% url 'memotion:memo_create' %}"><div class="addmemo"><h1 class="plus">+<br></h1></div></a>
 {% endif %}
 {% endfor %}
-
     {% else %}
-
 <a href="{% url 'memotion:memo_create' %}"><div class="addmemo"><h1 class="plus">+</h1></div></a>
     {% endif %}
 </body>
