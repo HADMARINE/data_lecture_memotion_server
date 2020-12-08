@@ -2,28 +2,75 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+          rel="stylesheet">
     <title>Memotion</title>
     <style>
         .Wrapper {
             display: flex;
-            flex-direction: row;
             width: 100vw;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .Left {
-            display: flex;
-            flex: 8;
-        }
-
-        .Right {
-            display: flex;
-            flex: 2;
+            padding: 20px;
         }
 
         #text_copy {
             display: none;
+        }
+
+        * {
+            border: none;
+        }
+
+        *:focus {
+            outline: none;
+        }
+
+        .button {
+            font-size: 18px;
+            font-weight: 500;
+            transition: all 0.3s ease-out;
+            background-color: #495AE6;
+            color: white;
+            border: 1px solid #495AE6;
+            border-radius: 5px;
+            padding: 10px 15px 10px 15px;
+        }
+
+        .button:hover {
+            background-color: #5D97FC;
+            border: 1px solid white;
+        }
+
+        .input {
+            border-radius: 5px;
+            font-size: 15px;
+            padding: 10px;
+            transition: all 0.1s ease-out;
+        }
+
+        .title {
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .textarea {
+            width: 50vw;
+            height: 30rem;
+        }
+
+        .hor {
+            display: flex;
+            flex-direction: row;
+        }
+
+        body {
+            background-color: #5D97FC;
+            color: white;
+            font-size: 20px;
+        }
+
+        * {
+            font-family: 'Noto Sans KR', sans-serif;
         }
 
     </style>
@@ -41,27 +88,31 @@
 <div class="Wrapper">
     <div class="Left">
         <form action="{% url 'memotion:save_memo' selected_memo.id %}" method="post">{% csrf_token %}
-            <h1>제목</h1>
-            <input type="text" value="{{ selected_memo.title }}" name="title">
-            <h1>내용</h1>
-            <textarea name="content">{{ selected_memo.content }}</textarea><br>
+            <span>제목</span><br>
+            <input class="input title" type="text" value="{{ selected_memo.title }}" name="title"><br><br>
+            <span>내용</span><br>
+            <textarea class="input textarea" name="content">{{ selected_memo.content }}</textarea><br>
             {% if selected_memo.private %}
-                private<input type="checkbox" name="isChecked" value=True checked><br>
+                비밀글 <input type="checkbox" name="isChecked" value=True checked><br>
             {% else %}
-                private<input type="checkbox" name="isChecked" value=True><br>
+                비밀글 <input type="checkbox" name="isChecked" value=True><br>
             {% endif %}
-            <input type="submit" value="저장">
+            <br>
+            <input type="submit" class="button" value="저장">
         </form>
-        <form action="{% url 'memotion:delete_memo' selected_memo.id %}" method="post">{% csrf_token %}
-            <input type="submit" value="삭제">
-        </form>
+        <br>
+        <div class="hor">
+            <input type="text" id="text_copy" value="http://localhost:8000/memo/{{ selected_memo.id }}/view">
+            <button class="button" onclick="copy()">
+                공유하기
+            </button>
+            <div style="margin: 5px"></div>
+            <form action="{% url 'memotion:delete_memo' selected_memo.id %}" method="post">{% csrf_token %}
+                <input type="submit" class="button" value="삭제">
+            </form>
+        </div>
     </div>
-    <div class="Right">
-        <input type="text" id="text_copy" value="http://localhost:8000/memo/{{ selected_memo.id }}/view">
-        <button onclick="copy()">
-            공유하기
-        </button>
-    </div>
+
 </div>
 
 
