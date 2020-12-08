@@ -20,7 +20,8 @@ def index_page(request):
     except:
         memo_list = None
 
-    context = {'memo_list': memo_list}
+    user = User.objects.get(pk=user_id)
+    context = {'memo_list': memo_list, 'user': user}
     return render(request, 'memotion/index_page.html', context)
 
 
@@ -51,7 +52,7 @@ def save_memo(request, memo_id):
 def create_memo(request):
     id = request.session.get('user_id', None)
 
-    if id == None:
+    if id is None:
         return HttpResponseRedirect("/login")
 
     user = User.objects.get(user_id=id)
@@ -64,7 +65,6 @@ def create_memo(request):
     memo.save()
 
     return render(request, 'memotion/memo.html', {'selected_memo': memo})
-
 
 def delete_memo(request, memo_id):
     Memo.objects.filter(pk=memo_id).delete()
@@ -112,16 +112,24 @@ def register(request):
     _pw = request.POST['password']
     name = request.POST['name']
 
-    # find_user = User.objects.get(user_id=id)
+    # find_user = User.objects.get(pk=id)
+    #
     # if find_user is not None:
     #     return HttpResponse("User already exists.")
 
-    user = User()
+    try:
+        find_user = User.objects.get(user_id=id)
 
-    user.user_id = id
-    user.password = _pw
-    user.name = name
+    except:
 
-    user.save()
+        user = User()
 
-    return HttpResponseRedirect('/login')
+        user.user_id = id
+        user.password = _pw
+        user.name = name
+
+        user.save()
+
+        return HttpResponseRedirect('/login')
+
+    return HttpResponse("User exists")

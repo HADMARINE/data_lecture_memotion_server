@@ -3,14 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <title>Memotion</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Ranchers&display=swap" rel="stylesheet">
+    <style>
+        h1{
+        position:relative;
+        text-align:center;
+        font-family: 'Ranchers', cursive;
+        font-size:70px;
+        color:white;
+        text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+        }
+        div{
+        position:absolute;
+        top:30px;
+        left:50%;
+        transform:translateX(-50%);
+        }
+        #id{
+        top:10px;
+        position:relative;
+        }
+        #pw{
+        position:relative;
+        top:25px;
+        }
+        #id, #pw{
+        position:relative;
+        width:400px;
+        height:40px;
+        border-radius:15px;
+        }
+        #login, #register{
+        position:relative;
+        width:200px;
+        height:40px;
+        top:40px;
+        border-radius:10px;
+        }
+        #login{
+
+        }
+        #register{
+        box-sizing:border-box;
+        left:208px;
+        top:0px;
+        }
+        body{
+        background-color:#5D97FC;
+        }
+    </style>
 </head>
 <body>
-<form action="{% url 'memotion:login' %}" method="post">{% csrf_token %}
-    <h1>로그인</h1>
-    <input type="id" value="" name="user_id" placeholder="ID"/><br>
-    <input type="password" value="" name="password" placeholder="PASSWORD"><br>
-    <input type="submit" value="로그인">
+<div><form action="{% url 'memotion:login' %}" method="post">{% csrf_token %}
+    <h1>Memotion</h1>
+    <input type="id" value="" name="user_id" placeholder="ID" id="id"/><br>
+    <input type="password" value="" name="password" placeholder="PASSWORD" id="pw"><br>
+    <input type="submit" value="로그인" id="login">
 </form>
-<a href="{% url 'memotion:register_page' %}"><button>회원가입</button></a>
+<a href="{% url 'memotion:register_page' %}"><button id="register">회원가입</button></a>
+</div>
 </body>
 </html>
