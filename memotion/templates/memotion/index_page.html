@@ -4,25 +4,36 @@
     <meta charset="UTF-8">
     <title>Memotion</title>
     <style>
-        a:link { color: black; text-decoration: none;}
- a:visited { color: black; text-decoration: none;}
- a:hover { color: black; text-decoration: underline;}
+        a:link {
+            color: black;
+            text-decoration: none;
+        }
+
+        a:visited {
+            color: black;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: black;
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
-<h1>{{user.name}}'s Memo</h1>
-    {% if memo_list %}
-        <ul>
-            {% for memo in memo_list %}
-                <li><a href="{% url 'memotion:show_memo' memo.id %}">{{memo.title}}</a></li>
-            {% endfor %}
-            <li><a href="{% url 'memotion:memo_create' %}">add memo</a></li>
-        </ul>
-    {% else %}
-        <p>No memo</p>
-<ul>
-    <li><a href="{% url 'memotion:memo_create' %}">add memo</a></li>
-</ul>
-    {% endif %}
+<h1>{{ user.name }}'s Memo</h1>
+{% if memo_list %}
+    <ul>
+        {% for memo in memo_list %}
+            <li><a href="{% url 'memotion:show_memo' memo.id %}">{{ memo.title }}</a></li>
+        {% endfor %}
+        <li><a href="{% url 'memotion:memo_create' %}">add memo</a></li>
+    </ul>
+{% else %}
+    <p>No memo</p>
+    <ul>
+        <li><a href="{% url 'memotion:memo_create' %}">add memo</a></li>
+    </ul>
+{% endif %}
 </body>
 </html>

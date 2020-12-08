@@ -112,11 +112,6 @@ def register(request):
     _pw = request.POST['password']
     name = request.POST['name']
 
-    # find_user = User.objects.get(pk=id)
-    #
-    # if find_user is not None:
-    #     return HttpResponse("User already exists.")
-
     try:
         find_user = User.objects.get(user_id=id)
 
