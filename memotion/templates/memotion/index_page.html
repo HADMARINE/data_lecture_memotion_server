@@ -67,10 +67,44 @@
             font-size: 100px;
         }
 
+        #logout_btn{
+            position: absolute;
+            width: 200px;
+            height: 40px;
+            top:0px;
+            right:0px;
+            margin-top:20px;
+            margin-right:20px;
+            border-radius: 10px;
+        }
+
+        * {
+            border: none;
+        }
+
+        *:focus {
+            outline: none;
+        }
+
+        .button {
+            font-size: 18px;
+            font-weight: 500;
+            transition: all 0.3s ease-out;
+            background-color: #495AE6;
+            color: white;
+            border: 1px solid #495AE6;
+        }
+
+        .button:hover {
+            background-color: #5D97FC;
+            border: 1px solid white;
+        }
+
     </style>
 </head>
 <body>
 <h1 id="name">{{ user.name }}'s Memo</h1>
+<form action="{% url 'memotion:logout' %}" method="post">{% csrf_token %}<button id="logout_btn" class="button">로그아웃</button></form>
 
 <div class="Wrapper">
 
