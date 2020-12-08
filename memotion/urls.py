@@ -15,7 +15,7 @@ urlpatterns = [
     path('api/login/', views.login, name="login"),
     path('register/', views.register_page, name="register_page"),
     path('api/register/', views.register, name="register"),
-    path('logout/', views.logout),
+    path('logout/', views.logout, name="logout"),
 ]
 
 app_name = 'memotion'
