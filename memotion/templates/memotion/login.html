@@ -96,8 +96,8 @@
 <div>
     <form action="{% url 'memotion:login' %}" method="post">{% csrf_token %}
         <h1>Memotion</h1>
-        <input type="id" value="" name="user_id" placeholder="ID" id="id"/><br>
-        <input type="password" value="" name="password" placeholder="PASSWORD" id="pw"><br>
+        <input type="id" value="" name="user_id" placeholder="아이디" id="id"/><br>
+        <input type="password" value="" name="password" placeholder="비밀번호" id="pw"><br>
         <input type="submit" value="로그인" id="login" class="button">
     </form>
     <a href="{% url 'memotion:register_page' %}">
