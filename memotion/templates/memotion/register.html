@@ -6,59 +6,95 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Ranchers&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ranchers&display=swap" rel="stylesheet">
     <title>Memotion</title>
     <style>
-            h1{
-    text-align:center;
-    font-family: 'Ranchers', cursive;
-        font-size:70px;
-        color:white;
-        text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-    }
-        form{
-        position:absolute;
-        top:30px;
-        left:50%;
-        transform:translateX(-50%);
+        .button {
+            font-size: 18px;
+            font-weight: 500;
+            transition: all 0.3s ease-out;
+            background-color: #495AE6;
+            color: white;
+            border: 1px solid #495AE6;
         }
-        #id{
-        top:10px;
-        position:relative;
+
+        .button:hover {
+            background-color: #5D97FC;
+            border: 1px solid white;
         }
-        #pw{
-        position:relative;
-        top:25px;
+
+        h1 {
+            text-align: center;
+            font-family: 'Ranchers', cursive;
+            font-size: 70px;
+            color: white;
+            text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
         }
-        #name{
-        position:relative;
-        top:40px;
+
+        form {
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
         }
-        #id, #pw, #name{
-        position:relative;
-        width:400px;
-        height:40px;
-        border-radius:15px;
+
+        #id {
+            top: 10px;
+            position: relative;
         }
-        #register{
-        position:relative;
-        top:55px;
-        width:408px;
-        height:40px;
-        border-radius:10px;
+
+        #pw {
+            position: relative;
+            top: 25px;
         }
-        body{
-        background-color:#5D97FC;
+
+        #name {
+            position: relative;
+            top: 40px;
+        }
+
+        #id, #pw, #name {
+            position: relative;
+            width: 400px;
+            height: 40px;
+            border-radius: 15px;
+            padding-left: 10px;
+            transition: all 0.1s ease-out;
+            font-size: 14px;
+        }
+
+        #id:focus, #pw:focus, #name:focus {
+            background-color: #B9D3FF;
+        }
+
+        #register {
+            position: relative;
+            top: 55px;
+            width: 408px;
+            height: 40px;
+            border-radius: 10px;
+        }
+
+        body {
+            background-color: #5D97FC;
+        }
+
+        * {
+            border: none;
+        }
+
+        *:focus {
+            outline: none;
         }
     </style>
 </head>
 <body>
-    <form action="{% url 'memotion:register'  %}" method="post">{% csrf_token %}
-        <h1>Memotion</h1>
-        <input type="id" value="" name="user_id" placeholder="ID" id="id"/><br>
-        <input type="password" value="" name="password" placeholder="PASSWORD" id="pw"><br>
-        <input type="name" value="" name="name" placeholder="NAME" id="name"><br>
-        <input type="submit" value="회원가입" id="register">
-    </form>
+<form action="{% url 'memotion:register' %}" method="post">{% csrf_token %}
+    <h1>Memotion</h1>
+    <input type="id" value="" name="user_id" placeholder="ID" id="id"/><br>
+    <input type="password" value="" name="password" placeholder="PASSWORD" id="pw"><br>
+    <input type="name" value="" name="name" placeholder="NAME" id="name"><br>
+    <input type="submit" value="회원가입" id="register" class="button">
+</form>
 </body>
 </html>
